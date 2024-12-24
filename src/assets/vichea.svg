@@ -1,0 +1,21 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 200 50"
+    width="200"
+    height="50"
+    fill="none"
+>
+    <!-- Triangle Icon -->
+    <polygon points="25,0 50,50 0,50" fill="black" />
+
+    <!-- Text -->
+    <text
+        x="70"
+        y="35"
+        font-family="'Inter', Arial, sans-serif"
+        font-size="30"
+        fill="black"
+    >
+        Vichea
+    </text>
+</svg>
