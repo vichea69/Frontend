@@ -35,36 +35,6 @@ const CreateProduct = () => {
         }
     };
 
-    // Handle form submission
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-
-    //     const formData = new FormData();
-    //     formData.append("name", name);
-    //     formData.append("description", description);
-    //     formData.append("price", price);
-    //     formData.append("category", category);
-    //     formData.append("image", image);
-
-    //     setLoading(true);
-    //     try {
-    //         await addProduct(formData);
-    //         alert("Product created successfully!");
-    //         navigate("/product");
-    //         // Reset form fields
-    //         setName("");
-    //         setDescription("");
-    //         setPrice("");
-    //         setCategory("");
-    //         setImage(null);
-    //         setPreview(null);
-
-    //     } catch (err) {
-    //         console.error("Error adding product:", err.message);
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
     const handleSubmit = async (e) => {
         e.preventDefault();
     

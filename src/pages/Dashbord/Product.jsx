@@ -1,43 +1,22 @@
 import { Badge } from "@/components/ui/badge";
 import { CardTitle } from "@/components/ui/card.jsx";
-import axios from "axios";
-import {useContext, useEffect, useState} from "react";
+import {useContext,  useState} from "react";
 import {CartContext} from "@/context/CartContext.jsx";
 import AlertAddToCart from "@/pages/Cart/AddToCartAlert.jsx";
 import {Link} from "react-router";
+import {ProductContext} from "@/context/ProductContext.jsx";
 
 
 const Product = () => {
-    const [products, setProducts] = useState([]); // State to hold fetched products
-    const [loading, setLoading] = useState(true); // State for loading status
-    const [error, setError] = useState(null); // State for error handling
     const {addToCart} = useContext(CartContext);
     const [alert, setAlert] = useState(null); // State for success alert
-
+    const { products , loading} = useContext(ProductContext);
     const handleAddToCart = (product) => {
         console.log("Product being added:", product);
         addToCart(product);
         setAlert(`Added "${product.name}" to cart!`); // Set success message
         setTimeout(() => setAlert(null), 3000); // Hide alert after 3 seconds
     };
-
-    // Fetch products on component mount
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const response = await axios.get("http://localhost:3000/api/products/");
-                console.log("API Response:", response.data); // Debugging API response
-                setProducts(response.data.products || []); // Access the 'products' key
-            } catch (err) {
-                console.error("Error fetching products:", err);
-                setError("Failed to load products. Please try again later.");
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchProducts();
-    }, []);
 
     // Render loading state
     if (loading) {
@@ -47,30 +26,21 @@ const Product = () => {
             </div>
         );
     }
-
-    // Render error state
-    if (error) {
-        return (
-            <div className="flex items-center justify-center w-full h-screen">
-                <p className="text-lg font-semibold text-red-500">{error}</p>
-            </div>
-        );
-    }
-
+    
     // Render product grid
     return (
-        <div>{
+        <div className="flex justify-center">{
             alert && (
                 <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
                     <AlertAddToCart/>
                 </div>
             )
         }
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-5 xl:grid-cols-6 justify-items-center">
+        <div className="grid grid-cols sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2   ">
             {products.map((product) => (
                 <div
                     key={product._id} // Ensure unique key
-                    className="relative m-1 flex w-52  flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800"
+                    className="relative m-2 flex w-44 sm:w-40 flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md dark:border-gray-700 dark:bg-gray-800 "
                 >
                     <Link to={`/product/${product._id}`}
                         className="relative mx-2 mt-2 flex h-40 overflow-hidden rounded-lg bg-gray-200 dark:bg-black"
@@ -78,7 +48,9 @@ const Product = () => {
                     >
                         <img
                             className="object-cover object-center"
-                            src={`http://localhost:3000/${product.image || "placeholder.jpg"}`}
+                            src={`${import.meta.env.VITE_API_URL.replace("/api", "")}/${
+                                product.image
+                            }`}
                             alt={product.name || "Product Image"}
                             onError={(e) => (e.target.src = "/images/placeholder.jpg")}
                         />

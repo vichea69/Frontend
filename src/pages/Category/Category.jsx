@@ -26,10 +26,6 @@ const Category = () => {
         await updateCategory(id, updatedData); // Call context update function
     };
 
-
-    //call Add category function
-
-
     return (
         <div className="max-w-screen-xl mx-auto px-4 md:px-8 ">
             <div className="items-start justify-between md:flex">
@@ -42,8 +38,8 @@ const Category = () => {
                     <DialogDemo onAddSuccess={fetchCategories}/>
                 </div>
             </div>
-            <div className="mt-16 shadow-sm border rounded-lg overflow-x-auto">
-                <table className="w-[100%] table-auto text-sm text-left">
+            <div className="mt-16 shadow-sm border rounded-lg overflow-x-auto ">
+                <table className="w-[100%] table-auto text-sm text-left ">
                     <thead className="bg-gray-50 text-gray-600 font-medium border-b dark:bg-cyan-300dark:text-red-500">
                     <tr>
                         <th className="py-3 px-6">Name</th>
