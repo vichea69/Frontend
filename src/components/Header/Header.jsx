@@ -36,20 +36,21 @@ const Header = () => {
 
     return (
         <nav
-            className={`bg-white dark:bg-black text-gray-700 dark:text-gray-200 pb-5 md:text-sm ${
-                state
+            className={`bg-white dark:bg-black text-gray-700 dark:text-gray-200 pb-3 md:pb-0 md:text-sm ${state
                     ? "shadow-lg rounded-xl border mx-2 mt-2 md:shadow-none md:border-none md:mx-2 md:mt-0"
                     : ""
-            }`}
+                }`}
         >
             <div className="gap-x-14 items-center max-w-screen-xl mx-auto px-4 md:flex md:px-8">
                 {/* Logo */}
-                <div className="flex items-center justify-between py-5 md:block">
+                <div className="flex items-center justify-between py-3 md:py-5 md:block">
                     <Link to="/">
                         <Logo />
                     </Link>
                     {/* Menu button for mobile */}
-                    <div className="md:hidden">
+                    <div className="flex items-center gap-2 md:hidden">
+                        <ModeToggle />
+                        <SheetDemo />
                         <button
                             className="menu-btn text-gray-500 dark:text-gray-300 hover:text-gray-800"
                             onClick={() => setState(!state)}
@@ -89,11 +90,10 @@ const Header = () => {
 
                 {/* Navigation Links */}
                 <div
-                    className={`flex-1 items-center mt-8 md:mt-0 md:flex ${
-                        state ? "block" : "hidden"
-                    }`}
+                    className={`flex-1 items-center mt-4 md:mt-0 md:flex ${state ? "block" : "hidden"
+                        }`}
                 >
-                    <ul className="justify-center items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
+                    <ul className="justify-center items-center space-y-4 md:flex md:space-x-6 md:space-y-0">
                         {/* Public navigation links */}
                         {navigation.map((item, idx) => (
                             <li
@@ -117,9 +117,9 @@ const Header = () => {
                     </ul>
 
                     {/* User Authentication Buttons */}
-                    <div className="flex-1 gap-x-6 items-center justify-end mt-6 md:flex md:mt-0">
+                    <div className="flex-1 gap-x-4 items-center justify-end mt-4 space-y-3 md:space-y-0 md:flex md:mt-0">
                         {user ? (
-                            <div className="flex items-center gap-4">
+                            <div className="flex flex-col md:flex-row items-center gap-3">
                                 <span className="text-sm text-gray-700 dark:text-gray-200">
                                     Welcome, {user.username}
                                 </span>
@@ -128,13 +128,17 @@ const Header = () => {
                                 </RainbowButton>
                             </div>
                         ) : (
-                            <Link to="/login">
-                                <RainbowButton>Login</RainbowButton>
+                            <Link to="/login" className="block w-full md:w-auto">
+                                <RainbowButton className="w-full md:w-auto">
+                                    Login
+                                </RainbowButton>
                             </Link>
                         )}
-                        {/* Dark Mode Toggle */}
-                        <ModeToggle />
-                        <SheetDemo />
+                        {/* Dark Mode Toggle and Cart - Hidden on mobile as they're moved to top */}
+                        <div className="hidden md:flex items-center gap-3">
+                            <ModeToggle />
+                            <SheetDemo />
+                        </div>
                     </div>
                 </div>
             </div>

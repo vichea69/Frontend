@@ -1,16 +1,15 @@
 import { MarqueeDemo } from "../components/Marquee";
-import { IconCloudDemo } from "@/components/IconCloud.jsx";
+
 import { Hero } from "@/components/Hero.jsx";
-import { Feature } from "@/components/Home/Feature.jsx";
-import { OrbitingCirclesDemo } from "@/components/circles.jsx";
+import Product from "@/pages/Dashbord/Product.jsx";
 
 const Home = () => {
   return (
     <>
       <Hero />
-      <Feature></Feature>
+      <Product />
       <MarqueeDemo></MarqueeDemo>
-     
+
     </>
   );
 };

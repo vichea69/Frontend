@@ -1,8 +1,10 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useEffect, useState } from "react";
 import api from "@/api/api.jsx";
 
 export const ProductContext = createContext();
 
+// eslint-disable-next-line react/prop-types
 const ProductProvider = ({ children }) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -38,20 +40,20 @@ const ProductProvider = ({ children }) => {
             if (!productData.has("name") || !productData.has("description") || !productData.has("price") || !productData.has("category") || !productData.has("image")) {
                 throw new Error("All fields are required to add a product.");
             }
-    
+
             // API Request
             const response = await api.post("/products", productData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
             });
-    
+
             const newProduct = response.data.product; // Ensure backend response is structured correctly
-    
+
             // Update State
             setProducts((prevProducts) => [...prevProducts, newProduct]);
             console.log("Product added successfully:", newProduct); // Debug log
-    
+
             return newProduct;
         } catch (err) {
             console.error("Error adding product:", err.response?.data || err.message);

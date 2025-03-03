@@ -6,11 +6,11 @@ const ThemeProviderContext = createContext({
 });
 
 export function ThemeProvider({
-                                  children,
-                                  defaultTheme = "system",
-                                  storageKey = "vite-ui-theme",
-                                  ...props
-                              }) {
+    children,
+    defaultTheme = "system",
+    storageKey = "vite-ui-theme",
+    ...props
+}) {
     const [theme, setTheme] = useState(() => {
         return localStorage.getItem(storageKey) || defaultTheme;
     });
